@@ -1,4 +1,4 @@
-# Affinidi Use Case Implementation - Driving License - Holder
+# Affinidi Use Case Implementation - AED VC - Holder
 
 ## Table of contents
 
@@ -13,9 +13,9 @@
 
 ## Introduction
 
-Welcome to Driving License Use Case - Holder application. In this application, you will be able to see how does a user access his/her Affinidi Wallet which will stores all of their verifiable credentials. Holder application is important as other than viewing the credentials, it can used to accept or to approve sharing of credentials.
+Welcome to AED VC Use Case - Holder application. In this application, you will be able to see how does a user access his/her Affinidi Wallet which will stores all of their verifiable credentials. Holder application is important as other than viewing the credentials, it can used to accept or to approve sharing of credentials.  The Holder application will be used to scan the QR Code of the AED cabinet to gain access to the AED machine inside.
 
-You can either run this program in your local machine or try it out here: https://usecases.drivinglicense-holder.vc-generator.com/
+You can either run this program in your local machine or try it out here: https://hackathon.canacred.ca/
 
 ## Initial Set Up
 
