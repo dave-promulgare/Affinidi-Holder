@@ -20,10 +20,14 @@ function parseInfoFromToken(token) {
 }
 
 async function getCredentials(credentialShareRequestToken) {
+    console.log("getCredentials=", credentialShareRequestToken);
     const credentials = await window.sdk.getCredentials(credentialShareRequestToken)
+    console.log("Credentials=", credentials);
     if (!Array.isArray(credentials) || credentials.length < 1) {
+        console.log("NO Credentials");
         throw new Error('No credential found for this request!')
     }
+    console.log("Credentials=", credentials);
     return credentials
 }
 
@@ -46,16 +50,18 @@ const ShareCredential = (props) => {
     const credentialShareRequestToken = queryString.parse(props.location.search).token || ''
     const { requesterDid, callbackURL } = parseInfoFromToken(credentialShareRequestToken)
 
+    console.log("useEffect");
     useEffect(() => {
       window.sdk.init().then(networkMember => {
         window.messageService = new MessageService(networkMember)
       }).catch(console.error)
-  }, [])
+    }, [])
 
     const { loading: credentialsLoading, value: credentials, error: credentialsError } = useAsync(
         () => getCredentials(credentialShareRequestToken),
         [credentialShareRequestToken]
     )
+    console.log("credentialsLoading");
 
     const [
         { loading: createVPLoading, value: presentation, error: createVPError },
@@ -65,9 +71,14 @@ const ShareCredential = (props) => {
         [credentialShareRequestToken, credentials, requesterDid]
     );
 
+    console.log("createVPLoading");
+
+
     const searchKeyDetail = (credential) => {
+        console.log("searchKeyDetail");
         const types = credential.type
         if (types[types.length-1] === 'NameCredentialPersonV1') {
+            console.log("NameCredentialPersonV1");
             return 'Name Document'
         }
         if (types[types.length-1] === 'IDDocumentCredentialPersonV1') {
@@ -75,6 +86,7 @@ const ShareCredential = (props) => {
                 return 'Driving License'
             }
         }
+        console.log("cred type=",credential.type);
         return credential.type
     }
 
@@ -120,8 +132,8 @@ const ShareCredential = (props) => {
                             <tr key={index+1}>
                                 {console.log(credential)}
                                 <td>{index + 1}</td>
-                                <td>{credential.credentialSubject.data.givenName} {credential.credentialSubject.data.familyName}</td>
-                                <td>{searchKeyDetail(credential)}</td>
+                                <td>{credential.credentialSubject.data.name}</td>
+                                <td>AED Certified</td>
                                 <td>
                                     <Button onClick={() => onCreateVP([credential])}>Share</Button>
                                 </td>

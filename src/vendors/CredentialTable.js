@@ -43,8 +43,7 @@ const CredentialTable = ({ credentials }) => {
               <thead className="thead-light">
                 <tr>
                   <th>Index</th>
-                  <th>Given Name</th>
-                  <th>Family Name</th>
+                  <th>Name</th>
                   <th>Email</th>
                   <th>VC Type</th>
                 </tr>
@@ -55,10 +54,9 @@ const CredentialTable = ({ credentials }) => {
                     return (
                       <tr key={index+1}>
                         <th scope='row'>{index+1}</th>
-                        <td>{cred.givenName || cred.name}</td>
-                        <td>{cred.familyName || ''}</td>
+                        <td>{cred.name}</td>
                         <td>{cred.email || extractEmailFromIDDocument(cred) || '' }</td>
-                        <td>{cred.hasIDDocument ?  cred.hasIDDocument.hasIDDocument.documentType : 'ID Document'}</td>
+                        <td>{cred.hasIDDocument ?  cred.hasIDDocument.hasIDDocument.documentType : 'AED Certified'}</td>
                       </tr>
                     )
                   })
